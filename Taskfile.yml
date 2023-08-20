@@ -1,0 +1,14 @@
+version: "3"
+
+vars:
+  COBJFILE: "c.o"
+  COUTFILE: "c.out"
+
+tasks:
+  build:
+    cmds:
+      - zig build
+  run:
+    deps: [build]
+    cmds:
+      - ./zig-out/bin/piz

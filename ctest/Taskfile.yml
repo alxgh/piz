@@ -1,0 +1,17 @@
+version: "3"
+
+vars:
+  COBJFILE: "c.o"
+  COUTFILE: "c.out"
+  BUILDDIR: "build"
+
+tasks:
+  build:
+    cmds:
+      - mkdir -p build
+      - gcc -c -I/usr/include/postgresql -o {{.BUILDDIR}}/{{.COBJFILE}} main.c
+      - gcc -o {{.BUILDDIR}}/{{.COUTFILE}} {{.BUILDDIR}}/{{.COBJFILE}} -lpq
+  run:
+    deps: [build]
+    cmds:
+      - ./{{.BUILDDIR}}/{{.COUTFILE}}
